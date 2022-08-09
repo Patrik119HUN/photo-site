@@ -1,0 +1,13 @@
+.link{
+    @apply text-2xl text-white font-thin hover:underline;
+}
+.link-active{
+    @apply text-2xl text-white font-thin underline underline-offset-4;
+}
+
+.mobileNavBar{
+    @apply relative py-12 backdrop-blur-xl z-20 w-full
+}
+.mobileNavBar-active{
+    @apply relative py-12 bg-black z-20  w-full
+}
