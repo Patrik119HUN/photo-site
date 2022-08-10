@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
@@ -12,8 +12,8 @@ type Inputs = {
 
 function Contact() {
   const { t } = useTranslation();
-  const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const { register } = useForm<Inputs>();
+
 
   const form = useRef();
   const sendEmail = (e) => {
