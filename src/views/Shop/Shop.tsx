@@ -1,4 +1,4 @@
-import ShopCard from "components/ShopCard/ShopCard";
+import ShopCard from "components/ShopCard";
 import useShop from "Hooks/useShop";
 import { Base64 } from "js-base64";
 function Shop() {

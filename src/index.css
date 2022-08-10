@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-  body{
+@layer base {
+  body {
     @apply bg-black m-0;
   }
   html {
@@ -11,5 +11,44 @@
   }
   a {
     @apply text-2xl text-white font-thin;
+  }
+  button {
+    @apply border-orange-400 text-white text-2xl border-2 duration-100 ease-in hover:bg-orange-400;
+  }
+  p {
+    @apply text-white text-xl;
+  }
+}
+@layer components {
+  .heroBox {
+    @apply relative mx-auto my-5 w-screen sm:-left-7 sm:w-2/3 md:-left-14 xl:-left-28 xl:w-1/2 2xl:-left-32;
+  }
+
+  .textContainer {
+    @apply absolute -bottom-10 right-5 flex max-h-fit max-w-fit flex-col justify-items-center gap-3 bg-white py-5 px-8 sm:top-10 sm:-right-1/4
+    sm:py-4 sm:px-10 md:py-6 md:px-12 xl:py-8 xl:px-14 2xl:py-10 2xl:px-16;
+  }
+  .header {
+    @apply text-black whitespace-pre-line text-2xl font-normal leading-tight sm:text-3xl md:text-4xl xl:text-5xl 2xl:text-6xl;
+  }
+  .signature {
+    @apply text-black text-base font-thin italic sm:text-lg  md:text-2xl;
+  }
+
+  .link {
+    @apply text-2xl text-white font-thin hover:underline;
+  }
+  .link-active {
+    @apply text-2xl text-white font-thin underline underline-offset-4;
+  }
+
+  .mobileNavBar {
+    @apply relative py-12 backdrop-blur-xl z-20 w-full;
+  }
+  .mobileNavBar-active {
+    @apply relative py-12 bg-black z-20  w-full;
+  }
+  .inputBar {
+    @apply border-2 border-orange-400 bg-transparent text-2xl text-white focus:border-orange-500 focus:outline-none focus:ring-0;
   }
 }

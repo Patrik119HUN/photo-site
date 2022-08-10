@@ -1,61 +1,37 @@
+import { ImageAnimation } from "animations/Image";
 import { LazyMotion, domAnimation, m } from "framer-motion";
+import { ImageProps } from "interfaces/Image";
 
-const ImageAnimation = {
-  load: {
-    y: -100,
-    opacity: 0,
-  },
-  loaded: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 2,
-    },
-  },
-};
-
-interface ImageProps {
-  imageSource: string;
-  imageAlt: string;
-  imageName: string;
-  imageAdress: string;
-  className?: string;
-  ModalVisible?: any;
-  ModalImageSource?: any;
-  ModalName?: any;
-}
-function Image({
-  imageSource,
-  imageAlt,
-  imageName,
-  imageAdress,
-  className,
-  ModalVisible,
-  ModalImageSource,
-  ModalName,
-}: ImageProps) {
+function Image(image: ImageProps) {
   return (
-    <LazyMotion features={domAnimation} >
+    <LazyMotion features={domAnimation}>
       <m.div
-        className={`relative  ${className}`}
+        className={`relative  ${image.className}`}
         variants={ImageAnimation}
         initial={"load"}
         whileInView={"loaded"}
         viewport={{ once: true, amount: 0.2 }}
       >
-        <img className="h-full w-full" src={imageSource} alt={imageAlt} />
+        <img
+          className="h-full w-full"
+          src={image.imageSource}
+          alt={image.imageAlt}
+        />
         <div
           className="absolute inset-0 h-full w-full cursor-pointer bg-black bg-opacity-0 opacity-0 transition duration-200 ease-in-out hover:bg-opacity-50 hover:opacity-100"
           onClick={() => {
-            ModalVisible(true);
-            ModalImageSource(imageSource);
-            ModalName(imageName);
+            image.setModalData({
+              visible: true,
+              src: image.imageSource,
+              alt: image.imageAlt,
+              name: image.imageName,
+            });
           }}
         >
-          <p className="absolute inset-1/2 w-fit -translate-x-1/2 text-center text-4xl text-white">
-            {imageName}
+          <p className="absolute inset-1/2 w-fit -translate-x-1/2 text-center text-4xl">
+            {image.imageName}
             <br />
-            {imageAdress}
+            {image.imageAdress}
           </p>
         </div>
       </m.div>

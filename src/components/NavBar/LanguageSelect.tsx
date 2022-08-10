@@ -8,7 +8,7 @@ const Languages = [
 
 function MyListbox() {
   const [language, setLanguage] = useState("id");
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const handleLangChange = evt => {
     const lang = evt.target.value;

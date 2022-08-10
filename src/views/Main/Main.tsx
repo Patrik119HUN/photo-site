@@ -1,7 +1,7 @@
 import Hero from "components/Hero";
 import Gallery from "components/Gallery";
 
-function App() {
+function Main() {
   return (
     <div>
       <Hero />
@@ -10,4 +10,4 @@ function App() {
   )
 }
 
-export default App;
+export default Main;

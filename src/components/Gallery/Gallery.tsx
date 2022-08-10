@@ -1,4 +1,4 @@
-import { Fragment, Key, useState } from "react";
+import { Fragment, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { AnimatePresence } from "framer-motion";
 import Image from "components/Image/Image";
@@ -13,16 +13,22 @@ let Query = `*[_type == "image_gallery"]{
   }`;
 
 function Gallery() {
-  const [visible, setVisibility] = useState<boolean>(false);
-  const [imageSrc, setImageSrc] = useState<string>("");
-  const [ModalName, setModalName] = useState<string>("");
-  const imageData = QuerySanity(Query,[{ _id: 1, imageUrl: "", name: "", alt: "", place: "" }]);
+  const [modal, setModal] = useState({
+    src: "",
+    alt: "",
+    name: "",
+    visible: false,
+  });
+
+  const imageData = QuerySanity(Query, [
+    { _id: 1, imageUrl: "", name: "", alt: "", place: "" },
+  ]);
   return (
     <Fragment>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
         <Masonry gutter="10px">
           {imageData &&
-            imageData.map((photos: { _id: Key | null | undefined; imageUrl: string; name: string; alt: string; place: string; }) => (
+            imageData.map((photos) => (
               <Image
                 key={photos._id}
                 className="object-scale-down py-4 sm:px-5 "
@@ -30,9 +36,7 @@ function Gallery() {
                 imageName={photos.name}
                 imageAlt={photos.alt}
                 imageAdress={photos.place}
-                ModalVisible={setVisibility}
-                ModalImageSource={setImageSrc}
-                ModalName={setModalName}
+                setModalData={setModal}
               />
             ))}
         </Masonry>
@@ -43,14 +47,7 @@ function Gallery() {
         exitBeforeEnter={true}
         onExitComplete={() => null}
       >
-        {visible && (
-          <Modal
-            setOpenModal={setVisibility}
-            imageSource={imageSrc}
-            imageAlt={"imageAlt"}
-            ImageName={ModalName}
-          />
-        )}
+        {modal.visible && <Modal modalData={modal} setModalData={setModal} />}
       </AnimatePresence>
     </Fragment>
   );
