@@ -9,7 +9,10 @@ export default function FetchByID(handle: string, client: Client) {
   if (client != null && ProductData == null) {
     client.product
       .fetch(handle)
-      .then((data) => (setProductData(data), setVariantData(data.variants)))
+      .then((data) => {
+        setProductData(data);
+        setVariantData(data.variants);
+      })
       .catch(() => Navigate("/404"));
   }
 
