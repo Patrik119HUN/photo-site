@@ -24,7 +24,7 @@ const links = [
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Failed to find the root element");
 const root = createRoot(rootElement);
-console.log(process.env.REACT_APP_SHOPIFY_DOMAIN);
+
 root.render(
   <React.StrictMode>
     <ShopifyProvider>

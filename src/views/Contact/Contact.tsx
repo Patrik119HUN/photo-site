@@ -3,22 +3,18 @@ import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
 
-type Inputs = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  message: string;
-};
 
 function Contact() {
   const { t } = useTranslation();
-  const { register } = useForm<Inputs>();
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = () => sendEmail();
 
   const form = useRef();
-  const sendEmail = (e) => {
-    e.preventDefault();
-
+  const sendEmail = () => {
     emailjs
       .sendForm(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
@@ -41,7 +37,7 @@ function Contact() {
         <form
           ref={form}
           className="mx-auto w-fit flex flex-col gap-7"
-          onSubmit={sendEmail}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex flex-col gap-2">
             <p className="text-3xl">{t("Name")}:</p>
@@ -50,16 +46,26 @@ function Contact() {
                 <input
                   className="inputBar"
                   type="text"
-                  {...register("firstName", { required: true })}
+                  {...register("firstName", { required: true, maxLength: 80 })}
                 />
+                {errors.firstName && (
+                  <p className="text-red-600 font-bold italic">
+                    This field is required
+                  </p>
+                )}
                 <p className="opacity-70">{t("First_Name")}:</p>
               </div>
               <div className="flex flex-col">
                 <input
                   className="inputBar"
                   type="text"
-                  {...register("lastName")}
+                  {...register("lastName", { required: true, maxLength: 100 })}
                 />
+                {errors.lastName && (
+                  <p className="text-red-600 font-bold italic">
+                    This field is required
+                  </p>
+                )}
                 <p className="opacity-70">{t("Last_Name")}:</p>
               </div>
             </div>
@@ -69,16 +75,25 @@ function Contact() {
             <input
               className="w-full inputBar"
               type="email"
-              {...register("email")}
+              {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
             />
+            {errors.email && (
+              <p className="text-red-600 font-bold italic">
+                This field is required
+              </p>
+            )}
           </div>
           <div className="flex flex-col gap-2">
             <p className="text-3xl text-white">{t("Message")}:</p>
             <textarea
               className="w-full h-52 inputBar"
-              {...register("message")}
+              {...register("message", { required: true, maxLength: 300 })}
             />
-
+            {errors.message && (
+              <p className="text-red-600 font-bold italic">
+                This field is required
+              </p>
+            )}
             <button
               className="h-fit w-fit p-5 text-center text-xl md:text-3xl mt-2"
               type="submit"

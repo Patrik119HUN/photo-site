@@ -12,6 +12,7 @@ interface NavBarProps {
 function NavBar({ links }: NavBarProps) {
   const [visible, setVisibility] = useState<boolean>(false);
   const { t } = useTranslation();
+  console.log(visible);
   return (
     <Fragment>
       <div className="py-12 top-0 backdrop-blur-xl z-10 w-full sticky">
@@ -31,7 +32,7 @@ function NavBar({ links }: NavBarProps) {
             className="hover:cursor-pointer"
             color="white"
             size={40}
-            onClick={() => setVisibility(!visible)}
+            onClick={() => setVisibility(true)}
           />
           <AnimatePresence
             initial={false}

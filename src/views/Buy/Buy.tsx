@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Variants from "components/Variants/Variants";
 import FetchByID from "Hooks/FetchByHandle";
@@ -13,11 +13,14 @@ function Buy() {
 
   let { handle } = useParams<"handle">();
   const { client, cart } = useShop();
-  const {ProductData} = FetchByID(handle, client);
-  const [Variant, setVariant] = useState<string>();
+  const { VariantData, ProductData } = FetchByID(handle, client);
+  const [Variant, setVariant] = useState<any>();
+  useEffect(() => {
+    setVariant(VariantData[0]);
+  }, [VariantData]);
 
-  const ImageUrl = ProductData?.images[0].src || NoImage;
-  const Price = ProductData?.variants[0].price || "1000";
+  const ImageUrl = Variant?.image.src || NoImage;
+  const Price = Variant?.price || 100;
   const Title = ProductData?.title || "Title";
   const currencyCode = cart?.currencyCode || "USD";
 
@@ -30,9 +33,9 @@ function Buy() {
           alt="shop-card"
         />
       </div>
-      <div className="flex md:w-1/2 flex-col gap-y-3 md:gap-y-10">
-        <p className="text-3xl md:text-6xl text-white">{Title}</p>
-        <p className="text-xl md:text-3xl text-white">
+      <div className="flex md:w-1/2 flex-col gap-y-3 md:gap-y-10 ">
+        <p className="text-3xl md:text-6xl text-white self-center md:self-start">{Title}</p>
+        <p className="text-xl md:text-3xl text-white self-center md:self-start">
           {t("Price: ")}
           {Price} {currencyCode}
         </p>
@@ -40,12 +43,12 @@ function Buy() {
           <Variants
             setVariant={setVariant}
             Variant={Variant}
-            Variants={ProductData.variants}
+            Variants={VariantData}
           />
         )}
         <button
-          className="h-fit w-fit border-2 border-orange-400 p-5 text-center text-xl md:text-3xl text-white duration-100 ease-in hover:bg-orange-400"
-          onClick={AddLineItem(Base64.encode(Variant), 1)}
+          className="self-center md:self-start h-fit w-fit border-2 border-orange-400 p-5 text-center text-xl md:text-3xl text-white duration-100 ease-in hover:bg-orange-400"
+          onClick={AddLineItem(Base64.encode(Variant?.id), 1)}
         >
           {t("Add_To_Cart")}
         </button>

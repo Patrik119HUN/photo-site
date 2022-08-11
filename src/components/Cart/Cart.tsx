@@ -10,19 +10,19 @@ function Cart({ setCartOpen }: CartProps) {
   const { cart, client } = useShop();
 
   return (
-    <OutsideClickHandler
-      onOutsideClick={() => {
-        setCartOpen(false);
-      }}
-      display={"contents"}
-    >
-      <LazyMotion features={domAnimation}>
-        <m.div
-          className="absolute top-full bg-black w-full md:w-[35rem] border-2 border-orange-400 md:top-12 md:right-12 flex flex-col"
-          variants={CartAnimation}
-          initial={"hidden"}
-          animate={"visible"}
-          exit={"exit"}
+    <LazyMotion features={domAnimation}>
+      <m.div
+        className="absolute top-full bg-black w-full md:w-[35rem] border-2 border-orange-400 md:top-12 md:right-12 flex flex-col"
+        variants={CartAnimation}
+        initial={"hidden"}
+        animate={"visible"}
+        exit={"exit"}
+      >
+        <OutsideClickHandler
+          onOutsideClick={() => {
+            setCartOpen(false);
+          }}
+          display={"contents"}
         >
           <div className="flex justify-between px-4 pt-2">
             <p>Cart:</p>
@@ -63,9 +63,9 @@ function Cart({ setCartOpen }: CartProps) {
             </p>
             <button className="p-2">Checkout</button>
           </div>
-        </m.div>
-      </LazyMotion>
-    </OutsideClickHandler>
+        </OutsideClickHandler>
+      </m.div>
+    </LazyMotion>
   );
 }
 
