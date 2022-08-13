@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import NavBar from "components/NavBar";
 import { ShopifyProvider } from "utils/Shopify";
 import React, { Suspense } from "react";
-import CookieConsent from "react-cookie-consent";
 import "./utils/i18n";
 import "./index.css";
 
