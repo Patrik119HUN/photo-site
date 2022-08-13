@@ -36,7 +36,7 @@ function Buy() {
       <div className="flex md:w-1/2 flex-col gap-y-3 md:gap-y-10 ">
         <p className="text-3xl md:text-6xl text-white self-center md:self-start">{Title}</p>
         <p className="text-xl md:text-3xl text-white self-center md:self-start">
-          {t("Price: ")}
+          {t("Price")}{": "}
           {Price} {currencyCode}
         </p>
         {ProductData && (

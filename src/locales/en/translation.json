@@ -18,5 +18,12 @@
   "Small":"Small",
   "Large":"Large",
   "Extra":"Extra",
-  "about": "Hi! I’m Patrik, Tukacs a analoge\nphotographer who lives in\nSzeged. I shoot film since 2021. "
+  "about": "Hi! I’m Patrik, Tukacs a analoge\nphotographer who lives in\nSzeged. I shoot film since 2021. ",
+  "cart":"Cart:",
+  "total":"Total:",
+  "checkout":"Checkout",
+  "field_error":"This field is required!",
+  "CookiesConsent":"This website uses cookies to enhance the user experience.",
+  "CookiesConsentAccept":"I understand!",
+  "CookiesConsentDecline":"I decline!"
 }

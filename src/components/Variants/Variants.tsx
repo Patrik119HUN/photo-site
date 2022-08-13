@@ -1,7 +1,9 @@
 import { RadioGroup } from "@headlessui/react";
 import { VariantProps } from "interfaces/Variants";
+import { useTranslation } from "react-i18next";
 
 function Size({ Variants = [], setVariant, Variant }: VariantProps) {
+  const { t } = useTranslation();
   return (
     <div>
       <RadioGroup
@@ -9,7 +11,7 @@ function Size({ Variants = [], setVariant, Variant }: VariantProps) {
         value={Variant}
         onChange={setVariant}
       >
-        <p className="text-center text-lg md:text-3xl">Sizes:</p>
+        <p className="text-center text-lg md:text-3xl">{t("Select_Size")}{": "}</p>
         {Variants.map((Variants) => (
           <RadioGroup.Option
             className="mx-2 md:mx-5 "

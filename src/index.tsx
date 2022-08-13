@@ -3,10 +3,12 @@ import { createRoot } from "react-dom/client";
 import NavBar from "components/NavBar";
 import { ShopifyProvider } from "utils/Shopify";
 import React, { Suspense } from "react";
+import CookieConsent from "react-cookie-consent";
 import "./utils/i18n";
 import "./index.css";
 
 import { NoMatch } from "views";
+import Cookies from "components/Cookies";
 
 const Main = React.lazy(() => import("./views/Main/Main"));
 const Contact = React.lazy(() => import("./views/Contact/Contact"));
@@ -24,12 +26,12 @@ const links = [
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Failed to find the root element");
 const root = createRoot(rootElement);
-
 root.render(
   <React.StrictMode>
-    <ShopifyProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <ShopifyProvider>
         <NavBar BreakPoint={950} routes={links} />
+        <Cookies />
         <Routes>
           <Route
             path="/"
@@ -74,7 +76,7 @@ root.render(
           <Route path="*" element={<NoMatch />} />
           <Route path="/404" element={<NoMatch />} />
         </Routes>
-      </BrowserRouter>
-    </ShopifyProvider>
+      </ShopifyProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import { ShopCardAnimation } from "animations/ShopCard";
 
-function ShopCard({ product, handle }: ShopCardProps) {
+function ShopCard({ product, handle, client }: ShopCardProps) {
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -18,7 +18,10 @@ function ShopCard({ product, handle }: ShopCardProps) {
         <Link to={handle} replace={true}>
           <img
             className="aspect-square w-full cursor-pointer object-cover"
-            src={product.images[0].src}
+            src={client.image.helpers.imageForSize(product.images[0], {
+              maxWidth: 500,
+              maxHeight: 500,
+            })}
             alt={product.title}
           />
         </Link>

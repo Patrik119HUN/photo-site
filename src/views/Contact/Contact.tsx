@@ -50,7 +50,7 @@ function Contact() {
                 />
                 {errors.firstName && (
                   <p className="text-red-600 font-bold italic">
-                    This field is required
+                    {t("field_error")}
                   </p>
                 )}
                 <p className="opacity-70">{t("First_Name")}:</p>
@@ -63,7 +63,7 @@ function Contact() {
                 />
                 {errors.lastName && (
                   <p className="text-red-600 font-bold italic">
-                    This field is required
+                   {t("field_error")}
                   </p>
                 )}
                 <p className="opacity-70">{t("Last_Name")}:</p>
@@ -79,7 +79,7 @@ function Contact() {
             />
             {errors.email && (
               <p className="text-red-600 font-bold italic">
-                This field is required
+                {t("field_error")}
               </p>
             )}
           </div>
@@ -91,7 +91,7 @@ function Contact() {
             />
             {errors.message && (
               <p className="text-red-600 font-bold italic">
-                This field is required
+                {t("field_error")}
               </p>
             )}
             <button

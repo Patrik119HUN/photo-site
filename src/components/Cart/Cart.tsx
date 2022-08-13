@@ -5,10 +5,11 @@ import OutsideClickHandler from "react-outside-click-handler";
 import { CartProps } from "interfaces/Cart";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 import { CartAnimation } from "animations/Cart";
+import { useTranslation } from "react-i18next";
 
 function Cart({ setCartOpen }: CartProps) {
+  const { t } = useTranslation();
   const { cart, client } = useShop();
-
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -25,7 +26,7 @@ function Cart({ setCartOpen }: CartProps) {
           display={"contents"}
         >
           <div className="flex justify-between px-4 pt-2">
-            <p>Cart:</p>
+            <p>{t("cart")}</p>
             <IoClose
               color="orange"
               size={30}
@@ -58,10 +59,10 @@ function Cart({ setCartOpen }: CartProps) {
           </div>
           <div className="flex justify-between px-4 py-2 items-center ">
             <p>
-              Total:{" "}
+              {t("total")}{" "}
               {cart && [cart.totalPriceV2.amount, " ", cart.currencyCode]}
             </p>
-            <button className="p-2">Checkout</button>
+            <button className="p-2">{t("checkout")}</button>
           </div>
         </OutsideClickHandler>
       </m.div>

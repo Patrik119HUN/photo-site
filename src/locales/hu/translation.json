@@ -18,5 +18,12 @@
   "Small":"Kicsi",
   "Large":"Nagy",
   "Extra":"Oriasi",
-  "about": "Szia! Patrik vagyok,\nanalóg fotózással\nfoglalkozom 2021 óta."
+  "about": "Szia! Patrik vagyok,\nanalóg fotózással\nfoglalkozom 2021 óta.",
+  "cart":"Kosár:",
+  "total":"Összeg.:",
+  "checkout":"Fizetés",
+  "field_error":"A mező kitöltése kötelező!",
+  "CookiesConsent":"Ez az oldal sütiket használ.",
+  "CookiesConsentAccept":"Megértettem!",
+  "CookiesConsentDecline":"Elutasítom!"
 }

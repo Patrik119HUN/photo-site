@@ -3,6 +3,7 @@ import { createContext } from "react";
 import Client from "shopify-buy";
 import Cookies from "js-cookie";
 import { shopifyReducer, initialState } from "store/shopify/shopifyReducer";
+import { getCookieConsentValue } from "react-cookie-consent";
 export const ShopifyContext = createContext(undefined);
 
 interface ShopifyProviderProps {
@@ -35,11 +36,13 @@ export function ShopifyProvider({ children }: ShopifyProviderProps) {
         dispatch({ type: "shopInfoFetched", payload: shop });
 
         //loadCart
-        const loadCart = await client.checkout.addLineItems(
-          cart.id,
-          JSON.parse(Cookies.get("lineItems"))
-        );
-        dispatch({ type: "loadCart", payload: loadCart });
+        if (getCookieConsentValue() === "true") {
+          const loadCart = await client.checkout.addLineItems(
+            cart.id,
+            JSON.parse(Cookies.get("lineItems"))
+          );
+          dispatch({ type: "loadCart", payload: loadCart });
+        }
         // catch any errors thrown in bootstrapping process
       } catch (error) {
         // TODO: real error handling here, perhaps to real logs or do something else entirely
