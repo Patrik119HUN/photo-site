@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import Image from "components/Image/Image";
 import Modal from "components/Modal/Modal";
 import QuerySanity from "Hooks/QuerySanity";
+import { useTranslation } from "react-i18next";
 let Query = `*[_type == "image_gallery"]{
     _id,
     "place":city ->city,
@@ -13,6 +14,7 @@ let Query = `*[_type == "image_gallery"]{
   }`;
 
 function Gallery() {
+  const { t } = useTranslation();
   const [modal, setModal] = useState({
     src: "",
     alt: "",
@@ -25,6 +27,11 @@ function Gallery() {
   ]);
   return (
     <Fragment>
+      <div className="my-10 flex w-full flex-col">
+        <h1 className="mx-auto my-3 text-4xl text-white sm:my-10  sm:text-7xl">
+          {t("Gallery")}
+        </h1>
+      </div>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
         <Masonry gutter="10px">
           {imageData &&

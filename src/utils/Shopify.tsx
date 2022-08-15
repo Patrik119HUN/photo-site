@@ -12,7 +12,6 @@ interface ShopifyProviderProps {
 
 export function ShopifyProvider({ children }: ShopifyProviderProps) {
   const [state, dispatch] = useReducer(shopifyReducer, initialState);
-
   useEffect(() => {
     async function bootstrapShopify(): Promise<void> {
       try {
@@ -51,7 +50,6 @@ export function ShopifyProvider({ children }: ShopifyProviderProps) {
     }
     bootstrapShopify();
   }, []);
-
   const updateCart = (products) => {
     dispatch({ type: "updateCart", payload: products });
   };

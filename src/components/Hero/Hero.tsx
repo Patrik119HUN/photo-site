@@ -27,11 +27,7 @@ function Hero() {
           <p className="signature indent-3">Tukacs Patrik</p>
         </motion.div>
       </motion.div>
-      <div className="my-10 flex w-full flex-col">
-        <h1 className="mx-auto my-3 text-4xl text-white sm:my-10  sm:text-7xl">
-          {t("Gallery")}
-        </h1>
-      </div>
+
     </Fragment>
   );
 }
