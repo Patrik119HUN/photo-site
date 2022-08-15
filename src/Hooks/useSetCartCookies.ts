@@ -18,14 +18,12 @@ export function setCartCookies(cart) {
   }
   const IDs = mapItems(cart);
   try {
-    console.log(IDs);
     Cookies.set("lineItems", JSON.stringify(IDs), {
       path: "/",
       expires: 365,
       sameSite: "lax",
       secure: false,
     });
-    console.log("Cookie", JSON.parse(Cookies.get("lineItems")));
   } catch {
     console.log("error");
   }

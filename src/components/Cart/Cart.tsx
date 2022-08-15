@@ -62,7 +62,16 @@ function Cart({ setCartOpen }: CartProps) {
               {t("total")}{" "}
               {cart && [cart.totalPriceV2.amount, " ", cart.currencyCode]}
             </p>
-            <button className="p-2">{t("checkout")}</button>
+
+            <button
+              className="p-2"
+              onClick={() => {
+                window.location.replace(cart.webUrl);
+                return null;
+              }}
+            >
+              {t("checkout")}
+            </button>
           </div>
         </OutsideClickHandler>
       </m.div>
