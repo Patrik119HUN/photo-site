@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import sanityClient from "utils/sanityClient";
 import { Image } from "types/SanityImage";
 
-
 export function QuerySanity(Query: string, defaultValue: any = null) {
   const [QueryData, setQueryData] = useState(defaultValue);
   useEffect(() => {
@@ -40,7 +39,7 @@ export function FetchImages(lastId): Image[] {
         { lastId }
       )
       .then((result) => {
-        setImages(images.concat(result));
+        setImages((i) => i.concat(result));
       });
   }, [lastId]);
   return images;
