@@ -3,17 +3,14 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { AnimatePresence } from "framer-motion";
 import Image from "components/Image/Image";
 import Modal from "components/Modal/Modal";
-import QuerySanity from "Hooks/QuerySanity";
+import { FetchImages, GetNextPage } from "Hooks/QuerySanity";
 import { useTranslation } from "react-i18next";
-let Query = `*[_type == "image_gallery"]{
-    _id,
-    "place":city ->city,
-    "imageUrl": picture.asset->url,
-    "alt":picture.alt,
-    "name":picture.name,
-  }`;
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Gallery() {
+  const [lastId, setlastId] = useState("");
+  const images = FetchImages(lastId);
+
   const { t } = useTranslation();
   const [modal, setModal] = useState({
     src: "",
@@ -22,9 +19,6 @@ function Gallery() {
     visible: false,
   });
 
-  const imageData = QuerySanity(Query, [
-    { _id: 1, imageUrl: "", name: "", alt: "", place: "" },
-  ]);
   return (
     <Fragment>
       <div className="my-10 flex w-full flex-col">
@@ -32,21 +26,29 @@ function Gallery() {
           {t("Gallery")}
         </h1>
       </div>
+
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-        <Masonry gutter="10px">
-          {imageData &&
-            imageData.map((photos) => (
-              <Image
-                key={photos._id}
-                className="object-scale-down py-4 sm:px-5 "
-                imageSource={photos.imageUrl}
-                imageName={photos.name}
-                imageAlt={photos.alt}
-                imageAdress={photos.place}
-                setModalData={setModal}
-              />
-            ))}
-        </Masonry>
+        <InfiniteScroll
+          dataLength={images.length}
+          next={() => GetNextPage(images, setlastId)}
+          hasMore={true}
+          loader={""}
+        >
+          <Masonry gutter="10px">
+            {images &&
+              images.map((photos) => (
+                <Image
+                  key={photos._id}
+                  className="object-scale-down py-4 sm:px-5 "
+                  imageSource={photos.imageUrl}
+                  imageName={photos.name}
+                  imageAlt={photos.alt}
+                  imageAdress={photos.place}
+                  setModalData={setModal}
+                />
+              ))}
+          </Masonry>
+        </InfiniteScroll>
       </ResponsiveMasonry>
 
       <AnimatePresence
@@ -61,3 +63,13 @@ function Gallery() {
 }
 
 export default Gallery;
+/*   let Query = groq`*[_type == "image_gallery"] | order(_id) [0...5]{
+    _id,
+    "place":city ->city,
+    "imageUrl": picture.asset->url,
+    "alt":picture.alt,
+    "name":picture.name,
+  }`; */
+/*   [
+    { _id: 1, imageUrl: "", name: "", alt: "", place: "" },
+  ] */

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import HeroImage from "assets/01.jpg";
+import HeroImage from "assets/Hero.jpg";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { HeroAnimation } from "animations/Hero";
